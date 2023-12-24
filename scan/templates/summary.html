@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Result</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 50px;
+            transition: background-color 0.3s ease;
+            /* Add transition for smooth mode change */
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        h2.dark-mode,
+        p.dark-mode,
+        a.dark-mode {
+            color: #007bff;
+        }
+
+        a.dark-mode:hover {
+            background-color: #0056b3;
+        }
+
+        /* Loader styles */
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            display: none;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Card styles */
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;align-items:center;justify-content:center;margin-top:10rem;">
+        <div class="loader" id="loader"></div>
+    </div>
+    <div class="card" id="summary-card">
+        <h2>Summary:</h2>
+        <p id="summary">{{ summary }}</p>
+        <a href="{% url 'index' %}" id="back-btn">Back to Home</a>
+    </div>
+
+    <script>
+        // Add dark mode class if it was turned on
+        if (document.body.classList.contains('dark-mode')) {
+            document.getElementById('summary-card').classList.add('dark-mode');
+            document.getElementById('back-btn').classList.add('dark-mode');
+        }
+
+        // Show loader for 3 seconds
+        document.getElementById('loader').style.display = 'block';
+        setTimeout(() => {
+            // Hide loader and show the summary card
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('summary-card').style.display = 'block';
+        }, 3000); // Show loader for 3 seconds
+    </script>
+</body>
+
+</html>
